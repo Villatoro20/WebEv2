@@ -1,61 +1,63 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Halcon - Sistema de Gestión de Pedidos
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+Este proyecto es una aplicación web desarrollada con Laravel para automatizar los procesos internos de la distribuidora de materiales de construcción "Halcon". La aplicación permite gestionar pedidos, usuarios, roles y realizar un seguimiento del estado de los pedidos, incluyendo la posibilidad de cargar y visualizar fotografías como evidencia de entregas.
 
-## About Laravel
+## Características Principales
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+1. **Gestión de Pedidos**:
+   - Crear, actualizar y eliminar pedidos (lógica de eliminación).
+   - Seguimiento del estado de los pedidos: Ordenado, En proceso, En ruta, Entregado.
+   - Carga de fotografías como evidencia durante el proceso de entrega.
+   - Búsqueda de pedidos por número de factura, número de cliente, fecha y estado.
+   - Restauración de pedidos eliminados lógicamente.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+2. **Gestión de Usuarios y Roles**:
+   - Usuarios categorizados por roles: Ventas, Compras, Almacén, Ruta.
+   - Creación, edición y desactivación de usuarios.
+   - Roles definidos para asegurar que los usuarios solo accedan a las funciones asignadas a su departamento.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+3. **Gestión de Clientes**:
+   - Creación y edición de clientes con datos fiscales.
+   - Búsqueda de clientes registrados.
 
-## Learning Laravel
+4. **Fotos de Evidencia**:
+   - Opción para que los empleados del departamento de Ruta carguen fotografías al iniciar y finalizar la entrega de un pedido.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Requisitos del Sistema
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- PHP >= 7.4
+- Composer
+- Laravel >= 8.x
+- MySQL o cualquier otra base de datos compatible con Laravel
 
-## Laravel Sponsors
+## Instalación
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Sigue estos pasos para instalar y configurar el proyecto en tu entorno local:
 
-### Premium Partners
+1. **Clonar el repositorio**:
+   ```bash
+   git clone https://github.com/TuUsuario/halcon-laravel.git
+## Uso del Sistema
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+### Usuarios sin registro
+- Los usuarios pueden buscar el estado de un pedido utilizando su número de cliente y el número de factura.
+- Si el pedido ha sido entregado, se mostrará la fotografía de la entrega como evidencia.
 
-## Contributing
+### Usuarios registrados
+- Acceso a un **dashboard** con enlaces a la gestión de pedidos, usuarios y otras funcionalidades según el rol asignado.
+- Los usuarios pueden crear, modificar o eliminar pedidos según su rol dentro de la empresa.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Estructura del Proyecto
 
-## Code of Conduct
+- **Models**: Definidos para gestionar la lógica de los datos de la aplicación, como `Cliente`, `Pedido`, `Usuario`, `Rol`, etc.
+- **Controllers**: Manejan las peticiones HTTP y coordinan las operaciones entre los modelos y las vistas.
+- **Migrations**: Estructuran las tablas de la base de datos, incluyendo claves foráneas y eliminaciones en cascada.
+- **Seeders**: Pueblan la base de datos con datos iniciales para testing.
+- **Factories**: Generan datos ficticios para pruebas.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Migraciones y Seeders
 
-## Security Vulnerabilities
+Se han definido migraciones para cada tabla y seeders para poblar la base de datos con datos iniciales. Asegúrate de ejecutar:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+php artisan migrate --seed
